@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="Arial, sans-serif" font-size="14">
+  <rect width="900" height="520" fill="#ffffff"/>
+  <text x="450" y="30" text-anchor="middle" font-size="20" font-weight="bold">Livestock Activity Collar - Schematic</text>
+
+  <!-- Arduino -->
+  <rect x="340" y="80" width="220" height="360" fill="#e6f2f5" stroke="#00707f" stroke-width="2"/>
+  <text x="450" y="255" text-anchor="middle" font-size="18" font-weight="bold">Arduino Uno</text>
+  <text x="450" y="277" text-anchor="middle">(ATmega328P)</text>
+  <g text-anchor="start">
+    <text x="348" y="125">5V</text>
+    <text x="348" y="175">GND</text>
+    <text x="348" y="225">A4 (SDA)</text>
+    <text x="348" y="345">A5 (SCL)</text>
+    <text x="348" y="415">VIN</text>
+  </g>
+  <g text-anchor="end">
+    <text x="552" y="125">D5</text>
+    <text x="552" y="215">D6</text>
+    <text x="552" y="305">D8</text>
+    <text x="552" y="415">GND</text>
+  </g>
+
+  <!-- MPU6050 -->
+  <rect x="60" y="90" width="150" height="270" fill="#fff4e0" stroke="#b36b00" stroke-width="2"/>
+  <text x="135" y="80" text-anchor="middle" font-weight="bold">MPU6050 (GY-521)</text>
+  <g text-anchor="end">
+    <text x="202" y="125">VCC</text>
+    <text x="202" y="175">GND</text>
+    <text x="202" y="225">SDA</text>
+    <text x="202" y="345">SCL</text>
+  </g>
+  <g stroke-width="2" fill="none">
+    <line x1="210" y1="120" x2="340" y2="120" stroke="#d00000"/>
+    <line x1="210" y1="170" x2="340" y2="170" stroke="#000000"/>
+    <line x1="210" y1="220" x2="340" y2="220" stroke="#0050c8"/>
+    <line x1="210" y1="340" x2="340" y2="340" stroke="#e07000"/>
+  </g>
+  <text x="275" y="212" text-anchor="middle" font-size="12">I2C</text>
+
+  <!-- Battery -->
+  <rect x="60" y="390" width="150" height="50" fill="#f0f0f0" stroke="#555" stroke-width="2"/>
+  <text x="135" y="420" text-anchor="middle">9 V battery (+)</text>
+  <line x1="210" y1="410" x2="340" y2="410" stroke="#d00000" stroke-width="2"/>
+  <text x="135" y="460" text-anchor="middle" font-size="12">battery (-) to GND</text>
+
+  <!-- Green LED branch -->
+  <line x1="560" y1="120" x2="610" y2="120" stroke="#008a00" stroke-width="2"/>
+  <rect x="610" y="108" width="70" height="24" fill="#fff" stroke="#000" stroke-width="2"/>
+  <text x="645" y="125" text-anchor="middle" font-size="12">220 &#937;</text>
+  <line x1="680" y1="120" x2="720" y2="120" stroke="#008a00" stroke-width="2"/>
+  <polygon points="720,105 720,135 750,120" fill="#3cc43c" stroke="#000" stroke-width="2"/>
+  <line x1="750" y1="105" x2="750" y2="135" stroke="#000" stroke-width="2"/>
+  <text x="735" y="96" text-anchor="middle" font-size="12">Green LED (active)</text>
+  <line x1="750" y1="120" x2="840" y2="120" stroke="#000" stroke-width="2"/>
+
+  <!-- Red LED branch -->
+  <line x1="560" y1="210" x2="610" y2="210" stroke="#d00000" stroke-width="2"/>
+  <rect x="610" y="198" width="70" height="24" fill="#fff" stroke="#000" stroke-width="2"/>
+  <text x="645" y="215" text-anchor="middle" font-size="12">220 &#937;</text>
+  <line x1="680" y1="210" x2="720" y2="210" stroke="#d00000" stroke-width="2"/>
+  <polygon points="720,195 720,225 750,210" fill="#e04040" stroke="#000" stroke-width="2"/>
+  <line x1="750" y1="195" x2="750" y2="225" stroke="#000" stroke-width="2"/>
+  <text x="735" y="186" text-anchor="middle" font-size="12">Red LED (alarm)</text>
+  <line x1="750" y1="210" x2="840" y2="210" stroke="#000" stroke-width="2"/>
+
+  <!-- Buzzer -->
+  <line x1="560" y1="300" x2="700" y2="300" stroke="#7a2bbf" stroke-width="2"/>
+  <circle cx="730" cy="300" r="30" fill="#ddd" stroke="#000" stroke-width="2"/>
+  <text x="730" y="305" text-anchor="middle" font-size="12">Buzzer</text>
+  <line x1="760" y1="300" x2="840" y2="300" stroke="#000" stroke-width="2"/>
+
+  <!-- Ground rail -->
+  <line x1="840" y1="120" x2="840" y2="410" stroke="#000" stroke-width="2"/>
+  <line x1="560" y1="410" x2="840" y2="410" stroke="#000" stroke-width="2"/>
+  <text x="700" y="432" text-anchor="middle" font-size="12">common ground</text>
+
+  <text x="450" y="495" text-anchor="middle" font-size="12" fill="#444">Sensor X axis points along the neck towards the head; Z axis points up.</text>
+</svg>
