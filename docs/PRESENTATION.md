@@ -1,7 +1,7 @@
 # 5-minute presentation outline
 
 **1. Title (20 s)**
-Livestock Activity Collar — name, supervisor.
+Livestock Activity Collar — Nazar Smatov, supervisor Tauheed Khan.
 
 **2. Problem and application (50 s)**
 - Sick animals move and eat less, but a farmer cannot watch a whole herd.

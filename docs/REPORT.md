@@ -5,8 +5,8 @@
 | | |
 |---|---|
 | **Title** | Livestock Activity Collar |
-| **Name** | _[your name]_ |
-| **Supervisor** | _[supervisor name]_ |
+| **Name** | Nazar Smatov |
+| **Supervisor** | Tauheed Khan |
 | **Application** | Precision livestock farming: automatic monitoring of animal behaviour and early detection of illness |
 | **Date** | 13 November 2026 |
 
