@@ -15,7 +15,9 @@ Simulated in Wokwi (red LED and buzzer = inactivity alarm):
 | Path | Description |
 |---|---|
 | [`docs/REPORT.md`](docs/REPORT.md) | Project progress report (introduction, methods, results) |
-| [`docs/PRESENTATION.md`](docs/PRESENTATION.md) | Outline for the 5-minute presentation |
+| [`docs/REPORT.pdf`](docs/REPORT.pdf) | The same report as PDF |
+| [`docs/presentation.pdf`](docs/presentation.pdf) | Slides for the 5-minute presentation |
+| [`docs/PRESENTATION.md`](docs/PRESENTATION.md) | Speaking outline for the presentation |
 | [`docs/schematic.png`](docs/schematic.png) | Circuit schematic |
 | [`firmware/livestock_collar/`](firmware/livestock_collar) | Arduino sketch and classifier |
 | [`simulation/diagram.json`](simulation/diagram.json) | Circuit for the Wokwi simulator |

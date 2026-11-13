@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Livestock Activity Collar</title>
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #1c2b30; }
+  .slide { width: 1280px; height: 720px; padding: 56px 72px; page-break-after: always; position: relative; background: #fff; overflow: hidden; }
+  .slide:last-child { page-break-after: auto; }
+  h1 { font-size: 40px; margin: 0 0 28px; color: #00606e; }
+  h1::after { content: ""; display: block; width: 90px; height: 5px; background: #e08a00; margin-top: 12px; }
+  ul { font-size: 26px; line-height: 1.45; margin: 0; padding-left: 28px; }
+  li { margin-bottom: 12px; }
+  .num { position: absolute; right: 40px; bottom: 28px; font-size: 16px; color: #7a8a8f; }
+  .title { background: #00606e; color: #fff; display: flex; flex-direction: column; justify-content: center; }
+  .title h1 { color: #fff; font-size: 64px; margin-bottom: 20px; }
+  .title p { font-size: 26px; margin: 6px 0; }
+  .title .sub { font-size: 30px; margin-bottom: 40px; color: #cfe8ec; }
+  .cols { display: flex; gap: 40px; align-items: flex-start; }
+  .cols > div { flex: 1; }
+  img { max-width: 100%; border: 1px solid #c9d6d9; border-radius: 6px; }
+  table { border-collapse: collapse; font-size: 21px; width: 100%; }
+  th, td { border: 1px solid #c9d6d9; padding: 8px 12px; text-align: left; }
+  th { background: #e6f2f5; }
+  .ok { color: #1b7a2f; font-weight: bold; }
+  .todo { color: #b04a00; font-weight: bold; }
+  .note { font-size: 20px; color: #55676c; margin-top: 16px; }
+  /* flowchart */
+  .flow { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; }
+  .box { border: 2px solid #00606e; background: #e6f2f5; border-radius: 8px; padding: 14px 12px; font-size: 20px; text-align: center; flex: 1; min-height: 92px; display: flex; flex-direction: column; justify-content: center; }
+  .box b { display: block; font-size: 21px; margin-bottom: 4px; }
+  .arrow { font-size: 30px; color: #e08a00; }
+  .rules { display: flex; gap: 18px; }
+  .rule { flex: 1; border-radius: 8px; padding: 16px; font-size: 21px; text-align: center; color: #fff; }
+  .rule b { display: block; font-size: 26px; margin-bottom: 6px; }
+  .rest { background: #5b6f7a; } .graze { background: #2e8b3d; } .walk { background: #c77400; }
+</style>
+</head>
+<body>
+
+<section class="slide title">
+  <h1>Livestock Activity Collar</h1>
+  <p class="sub">Arduino-based monitoring of animal behaviour</p>
+  <p><b>Name:</b> Nazar Smatov</p>
+  <p><b>Supervisor:</b> Tauheed Khan</p>
+  <p><b>Course:</b> ELT.123 Electronic Components and Circuits</p>
+  <p><b>Application:</b> precision livestock farming</p>
+</section>
+
+<section class="slide">
+  <h1>Problem and application</h1>
+  <ul>
+    <li>A sick or injured animal <b>moves and eats less</b>.</li>
+    <li>A farmer cannot watch every animal in a herd on open pasture.</li>
+    <li><b>Idea:</b> a collar that detects what the animal is doing and warns when it stops moving.</li>
+  </ul>
+  <p class="note" style="font-size:24px;margin-top:28px;color:#1c2b30"><b>Real-time applications</b></p>
+  <ul>
+    <li>Health monitoring and early illness detection</li>
+    <li>Heat (estrus) detection and calving alert</li>
+    <li>Pasture management from daily grazing time</li>
+  </ul>
+  <div class="num">2</div>
+</section>
+
+<section class="slide">
+  <h1>Components and schematic</h1>
+  <div class="cols">
+    <div style="flex:1.35"><img src="schematic.png" alt="Schematic"></div>
+    <div>
+      <table>
+        <tr><th>Component</th><th>Role</th></tr>
+        <tr><td>Arduino Uno</td><td>Controller</td></tr>
+        <tr><td>MPU6050</td><td>3-axis accelerometer, I2C (A4, A5)</td></tr>
+        <tr><td>Green LED, D5</td><td>Animal is active</td></tr>
+        <tr><td>Red LED, D6</td><td>Inactivity alarm</td></tr>
+        <tr><td>Buzzer, D8</td><td>Audible alarm</td></tr>
+        <tr><td>2 × 220 Ω</td><td>LED current ≈ 14 mA</td></tr>
+        <tr><td>9 V battery</td><td>Power</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">3</div>
+</section>
+
+<section class="slide">
+  <h1>How it works</h1>
+  <div class="flow">
+    <div class="box"><b>Sample</b>ax, ay, az<br>20 times per second</div>
+    <div class="arrow">&#10140;</div>
+    <div class="box"><b>Window</b>40 samples<br>= 2 seconds</div>
+    <div class="arrow">&#10140;</div>
+    <div class="box"><b>Intensity</b>spread of |a|<br>(gravity removed)</div>
+    <div class="arrow">&#10140;</div>
+    <div class="box"><b>Head angle</b>from direction<br>of gravity</div>
+    <div class="arrow">&#10140;</div>
+    <div class="box"><b>Classify</b>and log<br>to Serial</div>
+  </div>
+  <div class="rules">
+    <div class="rule rest"><b>RESTING</b>intensity &lt; 0.05 g</div>
+    <div class="rule graze"><b>GRAZING</b>moving and head down &gt; 30°</div>
+    <div class="rule walk"><b>WALKING</b>moving and head level</div>
+  </div>
+  <ul style="margin-top:30px">
+    <li>Green LED is on while the animal is active.</li>
+    <li>Resting for too long (30 s in the demo) &#8594; <b>red LED and buzzer</b>.</li>
+  </ul>
+  <div class="num">4</div>
+</section>
+
+<section class="slide">
+  <h1>Results so far</h1>
+  <div class="cols">
+    <div style="flex:1.15">
+      <table>
+        <tr><th>Item</th><th>Status</th></tr>
+        <tr><td>Schematic and firmware</td><td class="ok">Done</td></tr>
+        <tr><td>Classifier test on PC, synthetic signals</td><td class="ok">600 / 600 windows correct</td></tr>
+        <tr><td>Wokwi: compiles, runs, resting and alarm</td><td class="ok">Done</td></tr>
+        <tr><td>Wokwi: walking and grazing</td><td class="todo">Not yet</td></tr>
+        <tr><td>Real hardware and real animal</td><td class="todo">Not yet</td></tr>
+      </table>
+      <p class="note">The PC test checks the algorithm on generated signals. It is not the accuracy on a real animal.</p>
+    </div>
+    <div>
+      <img src="wokwi-circuit.png" alt="Wokwi simulation">
+      <p class="note" style="margin-top:8px">Wokwi simulation: inactivity alarm active</p>
+    </div>
+  </div>
+  <div class="num">5</div>
+</section>
+
+<section class="slide">
+  <h1>Next steps</h1>
+  <ul>
+    <li>Build the circuit on a breadboard and test on real hardware.</li>
+    <li>Record data from a real animal and tune the two thresholds.</li>
+    <li>Add a wireless link (Bluetooth or LoRa) so the farmer gets data remotely.</li>
+    <li>Add SD card logging and sleep modes for longer battery life.</li>
+    <li>Move to an Arduino Nano in a waterproof collar case.</li>
+  </ul>
+  <p class="note" style="margin-top:40px;font-size:24px">Code, schematic and report: <b>github.com/Cabbie227/livestock-activity-collar</b></p>
+  <div class="num">6</div>
+</section>
+
+</body>
+</html>
