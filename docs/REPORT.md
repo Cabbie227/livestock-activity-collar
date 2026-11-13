@@ -96,7 +96,8 @@ The classifier is in `firmware/livestock_collar/activity.h`, written in plain C+
 | Circuit design and schematic | Done |
 | Firmware (sensor reading, classifier, alarm, logging) | Written |
 | Classifier test on PC with synthetic signals | Done — passed |
-| Wokwi simulation circuit (`simulation/diagram.json`) | Prepared |
+| Wokwi simulation: firmware compiles and runs, resting detection and inactivity alarm | Done |
+| Wokwi simulation: walking and grazing cases | **Not done yet** |
 | Upload to a real Arduino and test on hardware | **Not done yet** |
 | Test on a real animal, threshold tuning | **Not done yet** |
 
@@ -122,7 +123,23 @@ Confusion matrix (rows = true, columns = predicted):
 
 All 600 windows were classified correctly. This result shows that the algorithm and thresholds work as designed on clean, well-separated signals. It does **not** show the accuracy on a real animal, where signals are noisier and the collar can rotate on the neck.
 
-### 3.3 Limitations and next steps
+### 3.3 Wokwi simulation
+
+The circuit was built in the Wokwi online simulator from `simulation/diagram.json` and the firmware was compiled and run on the simulated Arduino Uno.
+
+![Wokwi simulation with the inactivity alarm active](wokwi-circuit.png)
+
+With the accelerometer values held constant, the firmware reported `RESTING` with an intensity of 0.000 g in every 2-second window, for example:
+
+```
+240,RESTING,0.000,-90.0,24.7,0
+242,RESTING,0.000,-90.0,24.7,0
+244,RESTING,0.000,-90.0,24.7,0
+```
+
+After a period without movement the inactivity alarm switched on: the red LED lit up and the buzzer sounded, as shown in the screenshot. The walking and grazing cases have not yet been demonstrated in the simulator.
+
+### 3.4 Limitations and next steps
 
 - Build the circuit on a breadboard and confirm the firmware on real hardware.
 - Record data from a real animal and tune the two thresholds.

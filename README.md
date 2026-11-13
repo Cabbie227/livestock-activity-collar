@@ -6,6 +6,10 @@ A collar with an MPU6050 accelerometer that classifies an animal's activity as *
 
 ![Schematic](docs/schematic.png)
 
+Simulated in Wokwi (red LED and buzzer = inactivity alarm):
+
+![Wokwi simulation](docs/wokwi-circuit.png)
+
 ## Contents
 
 | Path | Description |

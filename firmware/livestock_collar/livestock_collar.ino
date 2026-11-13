@@ -46,10 +46,13 @@ bool readMpu(float &ax, float &ay, float &az, float &tempC) {
   if (Wire.endTransmission(false) != 0) return false;
   if (Wire.requestFrom(MPU_ADDR, (uint8_t)8) != 8) return false;
 
-  int16_t rawX = (Wire.read() << 8) | Wire.read();
-  int16_t rawY = (Wire.read() << 8) | Wire.read();
-  int16_t rawZ = (Wire.read() << 8) | Wire.read();
-  int16_t rawT = (Wire.read() << 8) | Wire.read();
+  // Read high byte first, then low byte (order made explicit).
+  uint8_t buf[8];
+  for (uint8_t i = 0; i < 8; i++) buf[i] = Wire.read();
+  int16_t rawX = (int16_t)((buf[0] << 8) | buf[1]);
+  int16_t rawY = (int16_t)((buf[2] << 8) | buf[3]);
+  int16_t rawZ = (int16_t)((buf[4] << 8) | buf[5]);
+  int16_t rawT = (int16_t)((buf[6] << 8) | buf[7]);
 
   // +/-2 g range: 16384 LSB per g
   ax = rawX / 16384.0;
