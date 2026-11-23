@@ -136,6 +136,16 @@ g++ -O2 -o test_activity test/test_activity.cpp && ./test_activity
 
 The test generates 250 random 4-second windows per activity (random head angle, movement amplitude and frequency) and prints the mean features and the confusion matrix. It exits with an error if the accuracy is below 95 %.
 
+### Whole firmware on a PC
+
+`test/firmware_sim/` runs the unchanged sketch with a simulated MPU6050 (walking → ruminating → resting with alarm → sensor unplugged → grazing):
+
+```bash
+cp firmware/livestock_collar/livestock_collar.ino /tmp/sketch.cpp
+g++ -O1 -include test/firmware_sim/Arduino.h -Itest/firmware_sim -Ifirmware/livestock_collar \
+    test/firmware_sim/sim_main.cpp /tmp/sketch.cpp -o firmware_sim && ./firmware_sim
+```
+
 ### Adjusting
 
 All thresholds are at the top of [`activity.h`](firmware/livestock_collar/activity.h); the alarm time `INACTIVITY_ALERT_MS` is at the top of the sketch. Set it to several hours (e.g. `4UL * 3600000UL`) for real use.
@@ -176,7 +186,9 @@ livestock-activity-collar/
 ├── firmware/livestock_collar/
 │   ├── livestock_collar.ino   # Arduino sketch: sensor, timing, LEDs, buzzer, logging
 │   └── activity.h             # features + decision tree (plain C++, also used by the PC test)
-├── test/test_activity.cpp     # PC test of the classifier with synthetic signals
+├── test/
+│   ├── test_activity.cpp      # PC test of the classifier with synthetic signals
+│   └── firmware_sim/          # runs the whole sketch on a PC with a simulated sensor
 ├── simulation/diagram.json    # Wokwi circuit
 ├── cad/                       # parametric enclosure model and STL files
 ├── docs/

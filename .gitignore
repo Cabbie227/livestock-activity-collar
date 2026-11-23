@@ -1,2 +1,4 @@
 test_activity
 *.o
+/firmware_sim
+/test_activity
