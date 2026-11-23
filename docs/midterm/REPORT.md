@@ -50,7 +50,7 @@ Resistor value: (5 V − 2 V) / 220 Ω ≈ 14 mA, safely below the 20 mA limit o
 
 ### 2.2 Schematic
 
-![Schematic](schematic.png)
+![Schematic](../images/schematic.png)
 
 | Arduino pin | Connected to |
 |---|---|
@@ -127,7 +127,7 @@ All 600 windows were classified correctly. This result shows that the algorithm 
 
 The circuit was built in the Wokwi online simulator from `simulation/diagram.json` and the firmware was compiled and run on the simulated Arduino Uno.
 
-![Wokwi simulation with the inactivity alarm active](wokwi-circuit.png)
+![Wokwi simulation with the inactivity alarm active](../images/wokwi-circuit.png)
 
 With the accelerometer values held constant, the firmware reported `RESTING` with an intensity of 0.000 g in every 2-second window, for example:
 
